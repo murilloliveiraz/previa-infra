@@ -17,7 +17,7 @@
 | **O que esta parte faz** | Sobe e mantém o servidor Linux que hospeda o painel web/API da PrevIA, com rede, DNS, monitoramento, auditoria e recuperação automática de falhas. |
 | **Indicador de impacto** | % de alagamentos previstos com antecedência; redução da lâmina d'água (cm); volume retido por quadra (m³) |
 | **ODS conectados** | ODS 6 (água), ODS 11 (cidades sustentáveis), ODS 13 (ação climática) |
-| **Integrantes** | `Nome 1 (RM)`, `Nome 2 (RM)`, `Nome 3 (RM)`, `Nome 4 (RM)`, `Nome 5 (RM)` |
+| **Integrantes** | Ana Clara Melo (RM 559021) · David Murillo de Oliveira Soares (RM 559078) · Lucas Serrano (RM 555170) · Yasmin Gonçalves Coelho (RM 559147) |
 
 ## Arquitetura
 
