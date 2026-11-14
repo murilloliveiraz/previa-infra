@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Painel de risco{% endblock %}
+{% block content %}
+<p class="muted">Atualizado em {{ agora }} · versao {{ versao }} · atualiza sozinho a cada 15 s</p>
+
+<h2>Risco de alagamento nas proximas 2 horas</h2>
+<div class="grid">
+{% for r in riscos %}
+  <div class="card">
+    <h3>{{ r.bairro }}</h3>
+    <span class="pill {{ r.risco }}">{{ r.risco }} · {{ r.score }}</span>
+    <p class="muted">Chuva prevista: <b>{{ r.chuva_prevista_mmh }} mm/h</b><br>
+       Nivel medio da drenagem: {{ r.nivel_medio_pct }}%<br>
+       Obstrucao media: {{ r.obstrucao_media_pct }}%
+       {% if r.sensores_offline %}<br>Sensores offline: {{ r.sensores_offline }}{% endif %}</p>
+    <div class="bar"><span style="width:{{ r.score }}%"></span></div>
+    <p><b>Acao:</b> {{ r.acao }}</p>
+  </div>
+{% endfor %}
+</div>
+
+<h2>Quadras inteligentes (reservatorios temporarios)</h2>
+<table>
+  <tr><th>Quadra</th><th>Bairro</th><th>Status</th><th>Volume</th></tr>
+  {% for q in quadras %}
+  <tr><td>{{ q.nome }}</td><td>{{ q.bairro }}</td><td>{{ q.status }}</td>
+      <td>{{ q.volume_m3|int }} / {{ q.capacidade_m3|int }} m³</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

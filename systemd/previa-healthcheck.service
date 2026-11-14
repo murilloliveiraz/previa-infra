@@ -1,0 +1,11 @@
+# PrevIA - Watchdog de segunda camada (executado pelo timer a cada minuto)
+# Garante que o monitor e a aplicacao estejam ativos, mesmo que alguem
+# pare o servico manualmente (systemctl stop nao dispara Restart=always).
+[Unit]
+Description=PrevIA - Health check / watchdog dos servicos
+
+[Service]
+Type=oneshot
+EnvironmentFile={{CONF_DIR}}/previa.env
+ExecStart=/usr/local/bin/previa-healthcheck
+SyslogIdentifier=previa-healthcheck

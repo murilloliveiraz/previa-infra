@@ -1,0 +1,26 @@
+# PrevIA - Servico de monitoramento da infraestrutura
+# Coleta CPU, memoria, disco e saude da aplicacao a cada MON_INTERVAL segundos,
+# gera logs/alertas e reinicia app/nginx se cairem (auto-heal).
+[Unit]
+Description=PrevIA - Monitor de infraestrutura (CPU, memoria, disco, app)
+After=network-online.target previa-app.service
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+EnvironmentFile={{CONF_DIR}}/previa.env
+ExecStart=/usr/local/bin/previa-monitor
+# Tolerancia a falhas: se o proprio monitor morrer, o systemd sobe de novo em 5s
+Restart=always
+RestartSec=5
+# Prioridade alta de CPU e protecao contra o OOM killer:
+# o monitor continua rodando mesmo com o servidor sob estresse
+Nice=-5
+OOMScoreAdjust=-900
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=previa-monitor
+
+[Install]
+WantedBy=multi-user.target

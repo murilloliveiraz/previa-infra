@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="15">
+<title>PrevIA - {% block title %}{% endblock %}</title>
+<style>
+  :root { --bg:#f4f7fb; --card:#fff; --ink:#14213d; --muted:#5c677d; --line:#dde3ec;
+          --baixo:#2a9d8f; --moderado:#e9c46a; --alto:#f4a261; --critico:#d62828; --brand:#0b5fa5; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); font-size:17px; }
+  header { background:var(--brand); color:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+  header h1 { margin:0; font-size:22px; } header small { opacity:.85; }
+  nav a { color:#fff; margin-left:16px; font-weight:600; }
+  main { max-width:1100px; margin:0 auto; padding:20px 16px; }
+  h2 { font-size:19px; margin:28px 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .card h3 { margin:0 0 6px; font-size:17px; }
+  .pill { display:inline-block; padding:3px 10px; border-radius:999px; font-weight:700; font-size:14px; color:#111; }
+  .Baixo{background:var(--baixo);color:#fff} .Moderado{background:var(--moderado)} .Alto{background:var(--alto)} .Critico{background:var(--critico);color:#fff}
+  .muted { color:var(--muted); font-size:14px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:10px; overflow:hidden; }
+  th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); font-size:15px; }
+  th { background:#eaf0f7; }
+  .bar { height:10px; background:#e5e9f0; border-radius:6px; overflow:hidden; margin-top:6px; }
+  .bar span { display:block; height:100%; background:var(--brand); }
+  footer { text-align:center; color:var(--muted); font-size:13px; padding:24px; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>PrevIA</h1><small>Quadras Inteligentes contra Alagamentos</small></div>
+  <nav><a href="/">Painel de risco</a><a href="/infra">Infraestrutura</a><a href="/api/health">API</a></nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer>Servidor: {{ host }} · Dados simulados para demonstracao · FIAP Global Solution 2026.2</footer>
+</body>
+</html>

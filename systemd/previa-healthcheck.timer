@@ -1,0 +1,12 @@
+# PrevIA - Agenda o watchdog a cada 1 minuto
+[Unit]
+Description=PrevIA - Agenda do health check (1 min)
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+AccuracySec=5s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

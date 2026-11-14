@@ -1,0 +1,12 @@
+2026-11-13 23:23:20 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-13 23:23:22 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+2026-11-13 23:23:22 | CRITICO | APP | previa-app=active http=000
+2026-11-13 23:23:38 | RECUPERADO | NGINX | nginx ativo novamente
+2026-11-13 23:23:40 | AUTO-HEAL | APP | servico previa-app reiniciado pelo monitor -> active
+2026-11-13 23:23:56 | CRITICO | CPU | uso=100% limite=80%
+2026-11-13 23:23:56 | RECUPERADO | APP | aplicacao respondendo http=200
+2026-11-13 23:24:29 | RECUPERADO | CPU | uso=12% voltou abaixo de 80%
+2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+2026-11-13 23:25:33 | RECUPERADO | MEM | uso=8% voltou abaixo de 80%
+2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+2026-11-13 23:26:06 | RECUPERADO | DISK | uso=2% voltou abaixo de 3%

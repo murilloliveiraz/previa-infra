@@ -1,0 +1,33 @@
+﻿2026-11-14 01:38:34 | ===== INICIO bateria 'all' =====
+2026-11-14 01:38:38 | app-crash | PASSOU | systemd reiniciou (PID 6019 -> 6724) e HTTP 200 em 5s; NRestarts=1
+2026-11-14 01:38:46 | monitor-kill | PASSOU | monitor reiniciado pelo systemd (PID 6162 -> 6742)
+2026-11-14 01:39:02 | nginx-stop | PASSOU | nginx recuperado em 11s | 2026-11-14 01:39:01 | CRITICO | NGINX | nginx esta 'failed'
+2026-11-14 01:39:20 | app-stop | PASSOU | app recuperado automaticamente em 18s | 2026-11-14 01:39:03 | CRITICO | APP | previa-app=active http=000
+2026-11-14 01:40:14 | cpu | FALHOU | nenhum alerta de CPU gerado
+2026-11-14 01:40:54 | mem | PASSOU | 2026-11-14 01:40:31 | ALERTA | MEM | uso=86% limite=80%
+2026-11-14 01:41:34 | disk | PASSOU | 2026-11-14 01:41:03 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 01:41:34 | ===== FIM bateria 'all': 6 passou, 1 falhou =====
+2026-11-14 01:44:19 | ===== INICIO bateria 'cpu' =====
+2026-11-14 01:45:30 | cpu | PASSOU | 2026-11-14 01:45:00 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 01:45:30 | ===== FIM bateria 'cpu': 1 passou, 0 falhou =====
+2026-11-14 01:45:45 | ===== INICIO bateria 'all' =====
+2026-11-14 01:45:48 | app-crash | PASSOU | systemd reiniciou (PID 6930 -> 8353) e HTTP 200 em 4s; NRestarts=0
+2026-11-14 01:45:56 | monitor-kill | PASSOU | monitor reiniciado pelo systemd (PID 6742 -> 8383)
+2026-11-14 01:46:11 | nginx-stop | PASSOU | nginx recuperado em 15s | 2026-11-14 01:46:11 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-14 01:46:31 | app-stop | PASSOU | app recuperado automaticamente em 19s | 2026-11-14 01:46:13 | CRITICO | APP | previa-app=active http=000
+2026-11-14 01:49:29 | cpu | PASSOU | 2026-11-14 01:49:13 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 01:49:33 | mem | PASSOU | 2026-11-14 01:49:31 | ALERTA | MEM | uso=84% limite=80%
+2026-11-14 01:49:48 | disk | PASSOU | 2026-11-14 01:49:47 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 01:49:48 | ===== FIM bateria 'all': 7 passou, 0 falhou =====
+2026-11-14 02:08:00 | ===== INICIO bateria 'all' =====
+2026-11-14 02:08:04 | app-crash | PASSOU | systemd reiniciou (PID 13530 -> 14151) e HTTP 200 em 4s; NRestarts=1
+2026-11-14 02:08:12 | monitor-kill | PASSOU | monitor reiniciado pelo systemd (PID 13677 -> 14169)
+2026-11-14 02:08:27 | nginx-stop | PASSOU | nginx recuperado em 10s | 2026-11-14 02:08:27 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-14 02:08:45 | app-stop | PASSOU | app recuperado automaticamente em 18s | 2026-11-14 02:08:29 | CRITICO | APP | previa-app=active http=000
+2026-11-14 02:15:50 | cpu | PASSOU | 2026-11-14 02:15:49 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 02:16:06 | mem | PASSOU | 2026-11-14 02:16:05 | ALERTA | MEM | uso=84% limite=80%
+2026-11-14 02:16:24 | disk | PASSOU | 2026-11-14 02:16:22 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 02:16:24 | ===== FIM bateria 'all': 7 passou, 0 falhou =====
+2026-11-14 02:17:31 | ===== INICIO bateria 'cpu' =====
+2026-11-14 02:23:21 | cpu | PASSOU | 2026-11-14 02:19:20 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 02:23:21 | ===== FIM bateria 'cpu': 1 passou, 0 falhou =====

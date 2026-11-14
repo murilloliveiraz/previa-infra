@@ -1,0 +1,28 @@
+2026-11-14 02:20:37 | user=root | uid=0 | host=521123316ae9 | script=provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:20:38 | user=root | uid=0 | host=521123316ae9 | script=01-infra-network.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:21:14 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=HOSTNAME | old=521123316ae9 new=previa-srv01 fqdn=previa-srv01.previa.local
+2026-11-14 02:21:14 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=DNS | servers='1.1.1.1 8.8.8.8' domain=previa.local internal='app.previa.local api.previa.local painel.previa.local'
+2026-11-14 02:21:16 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=FIREWALL | ufw enabled allow=22,80
+2026-11-14 02:21:17 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=END | status=SUCCESS rc=0 duration=10839s
+2026-11-14 02:21:17 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:28 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=USER_CREATE | user=previa
+2026-11-13 23:22:28 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=CONFIG | env=/etc/previa/previa.env
+2026-11-13 23:22:47 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=DEPLOY | version=1.0.0 dir=/opt/previa
+2026-11-13 23:22:48 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=SERVICE | previa-app enabled+restarted; nginx enabled+restarted
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=HEALTHCHECK | status=UP url=http://app.previa.local/api/health
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=END | status=SUCCESS rc=0 duration=-10708s
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:50 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=SERVICE | previa-monitor + previa-healthcheck.timer enabled
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=END | status=SUCCESS rc=0 duration=4s
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=provision.sh | action=END | status=SUCCESS rc=0 duration=136s
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='all' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:57 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-crash result=PASSOU
+2026-11-13 23:23:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=monitor-kill result=PASSOU
+2026-11-13 23:23:20 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=nginx-stop result=PASSOU
+2026-11-13 23:23:38 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-stop result=PASSOU
+2026-11-13 23:24:14 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-13 23:25:23 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=mem result=PASSOU
+2026-11-13 23:26:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=disk result=PASSOU
+2026-11-13 23:26:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=192s
+2026-11-13 23:26:06 | user=root | uid=0 | host=previa-srv01 | script=audit-report.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:26:08 | user=root | uid=0 | host=previa-srv01 | script=audit-report.sh | action=END | status=SUCCESS rc=0 duration=2s

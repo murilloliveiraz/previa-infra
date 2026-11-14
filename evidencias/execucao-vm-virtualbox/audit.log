@@ -1,0 +1,72 @@
+﻿2026-11-14 04:32:08 | user=vagrant | uid=0 | host=previa-srv01 | script=provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 04:32:08 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 04:33:19 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=HOSTNAME | old=previa-srv01 new=previa-srv01 fqdn=previa-srv01.previa.local
+2026-11-14 04:33:20 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=DNS | servers='1.1.1.1 8.8.8.8' domain=previa.local internal='app.previa.local api.previa.local painel.previa.local'
+2026-11-14 01:33:24 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=FIREWALL | ufw enabled allow=22,80
+2026-11-14 01:33:27 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=END | status=SUCCESS rc=0 duration=79s
+2026-11-14 01:33:27 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:34:43 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=USER_CREATE | user=previa
+2026-11-14 01:34:44 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=CONFIG | env=/etc/previa/previa.env
+2026-11-14 01:35:01 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=DEPLOY | version=1.0.0 dir=/opt/previa
+2026-11-14 01:35:05 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=SERVICE | previa-app enabled+restarted; nginx enabled+restarted
+2026-11-14 01:35:06 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=HEALTHCHECK | status=UP url=http://app.previa.local/api/health
+2026-11-14 01:35:06 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=END | status=SUCCESS rc=0 duration=99s
+2026-11-14 01:35:06 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:35:07 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=SERVICE | previa-monitor + previa-healthcheck.timer enabled
+2026-11-14 01:35:11 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=END | status=SUCCESS rc=0 duration=5s
+2026-11-14 01:35:12 | user=vagrant | uid=0 | host=previa-srv01 | script=provision.sh | action=END | status=SUCCESS rc=0 duration=184s
+2026-11-14 01:38:34 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='all' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:38:38 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-crash result=PASSOU
+2026-11-14 01:38:47 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=monitor-kill result=PASSOU
+2026-11-14 01:39:02 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=nginx-stop result=PASSOU
+2026-11-14 01:39:20 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-stop result=PASSOU
+2026-11-14 01:40:14 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=FALHOU
+2026-11-14 01:40:54 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=mem result=PASSOU
+2026-11-14 01:41:34 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=disk result=PASSOU
+2026-11-14 01:41:34 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=FAILURE rc=1 duration=180s
+2026-11-14 01:43:30 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:43:31 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=END | status=SUCCESS rc=0 duration=1s
+2026-11-14 01:44:19 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='cpu' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:45:30 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-14 01:45:31 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=72s
+2026-11-14 01:45:45 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='all' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:45:48 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-crash result=PASSOU
+2026-11-14 01:45:56 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=monitor-kill result=PASSOU
+2026-11-14 01:46:11 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=nginx-stop result=PASSOU
+2026-11-14 01:46:31 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-stop result=PASSOU
+2026-11-14 01:49:29 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-14 01:49:33 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=mem result=PASSOU
+2026-11-14 01:49:48 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=disk result=PASSOU
+2026-11-14 01:49:48 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=243s
+2026-11-14 01:49:48 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 01:49:49 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=END | status=SUCCESS rc=0 duration=1s
+2026-11-14 02:04:45 | user=vagrant | uid=0 | host=previa-srv01 | script=provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:04:45 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:04:57 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=HOSTNAME | old=previa-srv01 new=previa-srv01 fqdn=previa-srv01.previa.local
+2026-11-14 02:04:57 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=DNS | servers='1.1.1.1 8.8.8.8' domain=previa.local internal='app.previa.local api.previa.local painel.previa.local'
+2026-11-14 02:05:22 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=FIREWALL | ufw enabled allow=22,80
+2026-11-14 02:05:29 | user=vagrant | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=END | status=SUCCESS rc=0 duration=44s
+2026-11-14 02:05:29 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:05:32 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=CONFIG | env=/etc/previa/previa.env
+2026-11-14 02:05:35 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=DEPLOY | version=1.0.0 dir=/opt/previa
+2026-11-14 02:05:44 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=SERVICE | previa-app enabled+restarted; nginx enabled+restarted
+2026-11-14 02:05:44 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=HEALTHCHECK | status=UP url=http://app.previa.local/api/health
+2026-11-14 02:05:44 | user=vagrant | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=END | status=SUCCESS rc=0 duration=15s
+2026-11-14 02:05:44 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:05:46 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=SERVICE | previa-monitor + previa-healthcheck.timer enabled
+2026-11-14 02:05:49 | user=vagrant | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=END | status=SUCCESS rc=0 duration=5s
+2026-11-14 02:05:50 | user=vagrant | uid=0 | host=previa-srv01 | script=provision.sh | action=END | status=SUCCESS rc=0 duration=65s
+2026-11-14 02:08:00 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='all' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:08:04 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-crash result=PASSOU
+2026-11-14 02:08:12 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=monitor-kill result=PASSOU
+2026-11-14 02:08:27 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=nginx-stop result=PASSOU
+2026-11-14 02:08:45 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-stop result=PASSOU
+2026-11-14 02:15:50 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-14 02:16:07 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=mem result=PASSOU
+2026-11-14 02:16:24 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=disk result=PASSOU
+2026-11-14 02:16:24 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=504s
+2026-11-14 02:17:31 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='cpu' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:23:21 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-14 02:23:21 | user=vagrant | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=350s
+2026-11-14 02:23:49 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:23:51 | user=vagrant | uid=0 | host=previa-srv01 | script=audit-report.sh | action=END | status=SUCCESS rc=0 duration=2s

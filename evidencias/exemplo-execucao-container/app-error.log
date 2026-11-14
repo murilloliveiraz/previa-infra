@@ -1,0 +1,21 @@
+[2026-11-13 23:22:48 -0300] [5430] [INFO] Starting gunicorn 22.0.0
+[2026-11-13 23:22:48 -0300] [5430] [INFO] Listening at: http://127.0.0.1:8000 (5430)
+[2026-11-13 23:22:48 -0300] [5430] [INFO] Using worker: sync
+[2026-11-13 23:22:48 -0300] [5457] [INFO] Booting worker with pid: 5457
+[2026-11-13 23:22:48 -0300] [5458] [INFO] Booting worker with pid: 5458
+[2026-11-13 23:22:53 -0300] [5458] [INFO] Worker exiting (pid: 5458)
+[2026-11-13 23:22:53 -0300] [5457] [INFO] Worker exiting (pid: 5457)
+[2026-11-13 23:22:57 -0300] [5728] [INFO] Starting gunicorn 22.0.0
+[2026-11-13 23:22:57 -0300] [5728] [INFO] Listening at: http://127.0.0.1:8000 (5728)
+[2026-11-13 23:22:57 -0300] [5728] [INFO] Using worker: sync
+[2026-11-13 23:22:57 -0300] [5729] [INFO] Booting worker with pid: 5729
+[2026-11-13 23:22:57 -0300] [5730] [INFO] Booting worker with pid: 5730
+[2026-11-13 23:23:20 -0300] [5729] [INFO] Worker exiting (pid: 5729)
+[2026-11-13 23:23:20 -0300] [5730] [INFO] Worker exiting (pid: 5730)
+[2026-11-13 23:23:20 -0300] [5728] [INFO] Handling signal: term
+[2026-11-13 23:23:20 -0300] [5728] [INFO] Shutting down: Master
+[2026-11-13 23:23:38 -0300] [5941] [INFO] Starting gunicorn 22.0.0
+[2026-11-13 23:23:38 -0300] [5941] [INFO] Listening at: http://127.0.0.1:8000 (5941)
+[2026-11-13 23:23:38 -0300] [5941] [INFO] Using worker: sync
+[2026-11-13 23:23:38 -0300] [5943] [INFO] Booting worker with pid: 5943
+[2026-11-13 23:23:38 -0300] [5944] [INFO] Booting worker with pid: 5944

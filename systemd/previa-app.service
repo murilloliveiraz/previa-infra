@@ -1,0 +1,29 @@
+# PrevIA - Aplicacao web (Flask + Gunicorn)
+# Template: {{VAR}} e substituido pelo 02-app-provision.sh
+[Unit]
+Description=PrevIA - Painel de previsao de alagamentos (app web)
+After=network-online.target
+Wants=network-online.target
+# Sem limite de reinicios: o servico nunca fica "failed" por excesso de quedas
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User={{APP_USER}}
+Group={{APP_USER}}
+WorkingDirectory={{APP_DIR}}/app
+EnvironmentFile={{CONF_DIR}}/previa.env
+EnvironmentFile=-{{CONF_DIR}}/secret.env
+ExecStart={{APP_DIR}}/venv/bin/gunicorn --workers {{APP_WORKERS}} --bind 127.0.0.1:{{APP_PORT}} \
+    --access-logfile {{LOG_DIR}}/app-access.log --error-logfile {{LOG_DIR}}/app-error.log app:app
+# Tolerancia a falhas: qualquer queda (crash, kill -9, OOM) -> reinicia em 3s
+Restart=always
+RestartSec=3
+# Seguranca basica
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths={{DATA_DIR}} {{LOG_DIR}}
+
+[Install]
+WantedBy=multi-user.target

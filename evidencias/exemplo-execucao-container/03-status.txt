@@ -1,0 +1,20 @@
+=========== PrevIA - STATUS 2026-11-13 23:26:05 ===========
+Host : previa-srv01  |  IP: 172.17.0.2  |  Uptime: up 28 minutes
+
+  previa-app                 active     restarts=0
+  previa-monitor             active     restarts=1
+  previa-healthcheck.timer   active     restarts=
+  nginx                      active     restarts=0
+  auditd                     failed     restarts=5
+
+  HTTP /api/health: 200
+
+--- Ultima coleta do monitor ---
+2026-11-13 23:26:06 | CPU=  6% | MEM=  7% | DISK=  2% | LOAD=1.11 | APP=active | NGINX=active | HTTP=200
+
+--- Ultimos 5 alertas ---
+2026-11-13 23:24:29 | RECUPERADO | CPU | uso=12% voltou abaixo de 80%
+2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+2026-11-13 23:25:33 | RECUPERADO | MEM | uso=8% voltou abaixo de 80%
+2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+2026-11-13 23:26:06 | RECUPERADO | DISK | uso=2% voltou abaixo de 3%

@@ -1,0 +1,187 @@
+PrevIA - Relatorio de auditoria da infraestrutura
+Gerado em: 2026-11-13 23:26:06 por root
+
+==================== 1. IDENTIDADE DO SERVIDOR ====================
+ Static hostname: previa-srv01
+       Icon name: computer-container
+         Chassis: container
+      Machine ID: 0fc3f45daa754a3d812be28a42b8549e
+         Boot ID: ec398dd52add436292809c4aceec938b
+  Virtualization: wsl
+Operating System: Ubuntu 22.04.5 LTS
+          Kernel: Linux 6.18.33.2-microsoft-standard-WSL2
+    Architecture: x86-64
+Uptime: up 28 minutes
+
+==================== 2. REDE E DNS ====================
+lo               UNKNOWN        127.0.0.1/8 
+eth0@if9         UP             172.17.0.2/16 
+
+default via 172.17.0.1 dev eth0 
+172.17.0.0/16 dev eth0 proto kernel scope link src 172.17.0.2 
+
+--- /etc/hosts (bloco PrevIA) ---
+# >>> PREVIA (gerenciado automaticamente) >>>
+127.0.1.1   previa-srv01.previa.local previa-srv01
+172.17.0.2   app.previa.local api.previa.local painel.previa.local
+# <<< PREVIA <<<
+
+--- Resolucao de nomes ---
+previa-srv01.previa.local    -> 127.0.1.1
+app.previa.local             -> 172.17.0.2
+api.previa.local             -> 172.17.0.2
+painel.previa.local          -> 172.17.0.2
+github.com                   -> 4.228.31.150
+
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: foreign
+Current DNS Server: 192.168.65.7
+       DNS Servers: 192.168.65.7
+
+Link 2 (eth0)
+Current Scopes: none
+     Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+--- Firewall ---
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+80/tcp                     ALLOW IN    Anywhere                   # PrevIA HTTP
+80/tcp (v6)                ALLOW IN    Anywhere (v6)              # PrevIA HTTP
+
+
+==================== 3. SERVICOS ====================
+previa-app                 active     enabled=enabled  restarts=0
+previa-monitor             active     enabled=enabled  restarts=1
+previa-healthcheck.timer   active     enabled=enabled  restarts=
+nginx                      active     enabled=enabled  restarts=0
+auditd                     failed     enabled=enabled  restarts=5
+
+--- Health check da aplicacao ---
+{"app":"previa","db":"ok","env":"production","host":"previa-srv01","pid":5943,"status":"ok","time":"2026-11-13T23:26:08","version":"1.0.0"}
+
+
+==================== 4. RECURSOS (ultimas 15 coletas do monitor) ====================
+2026-11-13 23:22:50 | INFO | previa-monitor iniciado (pid=5552 intervalo=15s CPU<80% MEM<80% DISK<3%)
+2026-11-13 23:22:51 | CPU=  2% | MEM=  6% | DISK=  2% | LOAD=1.44 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:23:02 | INFO | previa-monitor iniciado (pid=5747 intervalo=15s CPU<80% MEM<80% DISK<3%)
+2026-11-13 23:23:03 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=1.19 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:23:20 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=0.92 | APP=active | NGINX=inactive | HTTP=000
+2026-11-13 23:23:38 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=0.72 | APP=inactive | NGINX=active | HTTP=502
+2026-11-13 23:23:56 | CPU=100% | MEM=  6% | DISK=  2% | LOAD=2.47 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:13 | CPU=100% | MEM=  6% | DISK=  2% | LOAD=3.70 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:29 | CPU= 12% | MEM= 39% | DISK=  2% | LOAD=3.84 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:45 | CPU= 13% | MEM= 80% | DISK=  2% | LOAD=3.29 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:01 | CPU=  0% | MEM= 84% | DISK=  2% | LOAD=2.56 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:17 | CPU=  0% | MEM= 84% | DISK=  2% | LOAD=1.99 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:33 | CPU=  0% | MEM=  8% | DISK=  6% | LOAD=1.50 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:49 | CPU=  0% | MEM=  8% | DISK=  6% | LOAD=1.25 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:26:06 | CPU=  6% | MEM=  7% | DISK=  2% | LOAD=1.11 | APP=active | NGINX=active | HTTP=200
+
+==================== 5. ALERTAS (ultimos 40) ====================
+2026-11-13 23:23:20 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-13 23:23:22 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+2026-11-13 23:23:22 | CRITICO | APP | previa-app=active http=000
+2026-11-13 23:23:38 | RECUPERADO | NGINX | nginx ativo novamente
+2026-11-13 23:23:40 | AUTO-HEAL | APP | servico previa-app reiniciado pelo monitor -> active
+2026-11-13 23:23:56 | CRITICO | CPU | uso=100% limite=80%
+2026-11-13 23:23:56 | RECUPERADO | APP | aplicacao respondendo http=200
+2026-11-13 23:24:29 | RECUPERADO | CPU | uso=12% voltou abaixo de 80%
+2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+2026-11-13 23:25:33 | RECUPERADO | MEM | uso=8% voltou abaixo de 80%
+2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+2026-11-13 23:26:06 | RECUPERADO | DISK | uso=2% voltou abaixo de 3%
+
+Totais por tipo:
+      1 RECUPERADO NGINX
+      1 RECUPERADO MEM
+      1 RECUPERADO DISK
+      1 RECUPERADO CPU
+      1 RECUPERADO APP
+      1 CRITICO NGINX
+      1 CRITICO CPU
+      1 CRITICO APP
+      1 AUTO-HEAL NGINX
+      1 AUTO-HEAL APP
+      1 ALERTA MEM
+      1 ALERTA DISK
+
+==================== 6. TESTES DE FALHA ====================
+2026-11-13 23:22:53 | ===== INICIO bateria 'all' =====
+2026-11-13 23:22:57 | app-crash | PASSOU | systemd reiniciou (PID 5430 -> 5728) e HTTP 200 em 5s; NRestarts=1
+2026-11-13 23:23:05 | monitor-kill | PASSOU | monitor reiniciado pelo systemd (PID 5552 -> 5747)
+2026-11-13 23:23:20 | nginx-stop | PASSOU | nginx recuperado em 15s | 2026-11-13 23:23:20 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-13 23:23:38 | app-stop | PASSOU | app recuperado automaticamente em 19s | 2026-11-13 23:23:22 | CRITICO | APP | previa-app=active http=000
+2026-11-13 23:24:13 | cpu | PASSOU | 2026-11-13 23:23:56 | CRITICO | CPU | uso=100% limite=80%
+2026-11-13 23:25:23 | mem | PASSOU | 2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+2026-11-13 23:26:05 | disk | PASSOU | 2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+2026-11-13 23:26:05 | ===== FIM bateria 'all': 7 passou, 0 falhou =====
+
+==================== 7. TRILHA DE AUDITORIA DOS SCRIPTS (audit.log) ====================
+2026-11-14 02:20:37 | user=root | uid=0 | host=521123316ae9 | script=provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:20:38 | user=root | uid=0 | host=521123316ae9 | script=01-infra-network.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-14 02:21:14 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=HOSTNAME | old=521123316ae9 new=previa-srv01 fqdn=previa-srv01.previa.local
+2026-11-14 02:21:14 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=DNS | servers='1.1.1.1 8.8.8.8' domain=previa.local internal='app.previa.local api.previa.local painel.previa.local'
+2026-11-14 02:21:16 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=FIREWALL | ufw enabled allow=22,80
+2026-11-14 02:21:17 | user=root | uid=0 | host=previa-srv01 | script=01-infra-network.sh | action=END | status=SUCCESS rc=0 duration=10839s
+2026-11-14 02:21:17 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:28 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=USER_CREATE | user=previa
+2026-11-13 23:22:28 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=CONFIG | env=/etc/previa/previa.env
+2026-11-13 23:22:47 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=DEPLOY | version=1.0.0 dir=/opt/previa
+2026-11-13 23:22:48 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=SERVICE | previa-app enabled+restarted; nginx enabled+restarted
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=HEALTHCHECK | status=UP url=http://app.previa.local/api/health
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=02-app-provision.sh | action=END | status=SUCCESS rc=0 duration=-10708s
+2026-11-13 23:22:49 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:50 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=SERVICE | previa-monitor + previa-healthcheck.timer enabled
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=03-monitoring-setup.sh | action=END | status=SUCCESS rc=0 duration=4s
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=provision.sh | action=END | status=SUCCESS rc=0 duration=136s
+2026-11-13 23:22:53 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=START | args='all' config=/opt/previa-infra/config/previa.env
+2026-11-13 23:22:57 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-crash result=PASSOU
+2026-11-13 23:23:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=monitor-kill result=PASSOU
+2026-11-13 23:23:20 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=nginx-stop result=PASSOU
+2026-11-13 23:23:38 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=app-stop result=PASSOU
+2026-11-13 23:24:14 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=cpu result=PASSOU
+2026-11-13 23:25:23 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=mem result=PASSOU
+2026-11-13 23:26:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=FAILURE_TEST | test=disk result=PASSOU
+2026-11-13 23:26:05 | user=root | uid=0 | host=previa-srv01 | script=failure-test.sh | action=END | status=SUCCESS rc=0 duration=192s
+2026-11-13 23:26:06 | user=root | uid=0 | host=previa-srv01 | script=audit-report.sh | action=START | args='' config=/opt/previa-infra/config/previa.env
+
+==================== 8. AUDITD - eventos do kernel (chaves previa_*) ====================
+auditd indisponivel neste ambiente
+
+==================== 9. JOURNALD (ultimos eventos dos servicos PrevIA) ====================
+Nov 13 23:23:20 previa-srv01 systemd[1]: previa-app.service: Deactivated successfully.
+Nov 13 23:23:20 previa-srv01 systemd[1]: Stopped PrevIA - Painel de previsao de alagamentos (app web).
+Nov 13 23:23:22 previa-srv01 previa-monitor[5883]: NGINX servico nginx reiniciado pelo monitor -> active
+Nov 13 23:23:22 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:22 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+Nov 13 23:23:22 previa-srv01 previa-monitor[5885]: APP previa-app=active http=000
+Nov 13 23:23:22 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:22 | CRITICO | APP | previa-app=active http=000
+Nov 13 23:23:38 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:38 | RECUPERADO | NGINX | nginx ativo novamente
+Nov 13 23:23:38 previa-srv01 systemd[1]: Started PrevIA - Painel de previsao de alagamentos (app web).
+Nov 13 23:23:40 previa-srv01 previa-monitor[5987]: APP servico previa-app reiniciado pelo monitor -> active
+Nov 13 23:23:40 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:40 | AUTO-HEAL | APP | servico previa-app reiniciado pelo monitor -> active
+Nov 13 23:23:50 previa-srv01 systemd[1]: Starting PrevIA - Health check / watchdog dos servicos...
+Nov 13 23:23:50 previa-srv01 systemd[1]: previa-healthcheck.service: Deactivated successfully.
+Nov 13 23:23:50 previa-srv01 systemd[1]: Finished PrevIA - Health check / watchdog dos servicos.
+Nov 13 23:23:56 previa-srv01 previa-monitor[6017]: CPU uso=100% limite=80%
+Nov 13 23:23:56 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:56 | CRITICO | CPU | uso=100% limite=80%
+Nov 13 23:23:56 previa-srv01 previa-monitor[5747]: 2026-11-13 23:23:56 | RECUPERADO | APP | aplicacao respondendo http=200
+Nov 13 23:24:29 previa-srv01 previa-monitor[6101]: CPU uso=12% voltou abaixo de 80%
+Nov 13 23:24:29 previa-srv01 previa-monitor[5747]: 2026-11-13 23:24:29 | RECUPERADO | CPU | uso=12% voltou abaixo de 80%
+Nov 13 23:24:45 previa-srv01 previa-monitor[5747]: 2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+Nov 13 23:24:55 previa-srv01 systemd[1]: Starting PrevIA - Health check / watchdog dos servicos...
+Nov 13 23:24:55 previa-srv01 systemd[1]: previa-healthcheck.service: Deactivated successfully.
+Nov 13 23:24:55 previa-srv01 systemd[1]: Finished PrevIA - Health check / watchdog dos servicos.
+Nov 13 23:25:33 previa-srv01 previa-monitor[6246]: MEM uso=8% voltou abaixo de 80%
+Nov 13 23:25:33 previa-srv01 previa-monitor[5747]: 2026-11-13 23:25:33 | RECUPERADO | MEM | uso=8% voltou abaixo de 80%
+Nov 13 23:25:33 previa-srv01 previa-monitor[6248]: DISK uso=6% limite=3%
+Nov 13 23:25:33 previa-srv01 previa-monitor[5747]: 2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+Nov 13 23:26:00 previa-srv01 systemd[1]: Starting PrevIA - Health check / watchdog dos servicos...
+Nov 13 23:26:00 previa-srv01 systemd[1]: previa-healthcheck.service: Deactivated successfully.
+Nov 13 23:26:00 previa-srv01 systemd[1]: Finished PrevIA - Health check / watchdog dos servicos.
+Nov 13 23:26:06 previa-srv01 previa-monitor[5747]: 2026-11-13 23:26:06 | RECUPERADO | DISK | uso=2% voltou abaixo de 3%

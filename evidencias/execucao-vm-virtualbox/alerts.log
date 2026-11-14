@@ -1,0 +1,43 @@
+﻿2026-11-14 01:39:01 | CRITICO | NGINX | nginx esta 'failed'
+2026-11-14 01:39:03 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+2026-11-14 01:39:03 | CRITICO | APP | previa-app=active http=000
+2026-11-14 01:39:19 | RECUPERADO | NGINX | nginx ativo novamente
+2026-11-14 01:39:21 | AUTO-HEAL | WATCHDOG | previa-app estava 'inactive' -> iniciado pelo healthcheck -> active
+2026-11-14 01:39:21 | AUTO-HEAL | APP | servico previa-app reiniciado pelo monitor -> active
+2026-11-14 01:40:14 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 01:40:14 | RECUPERADO | APP | aplicacao respondendo http=200
+2026-11-14 01:40:31 | RECUPERADO | CPU | uso=0% voltou abaixo de 80%
+2026-11-14 01:40:31 | ALERTA | MEM | uso=86% limite=80%
+2026-11-14 01:41:03 | RECUPERADO | MEM | uso=20% voltou abaixo de 80%
+2026-11-14 01:41:03 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 01:41:36 | RECUPERADO | DISK | uso=6% voltou abaixo de 85%
+2026-11-14 01:45:00 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 01:45:31 | RECUPERADO | CPU | uso=28% voltou abaixo de 80%
+2026-11-14 01:45:48 | CRITICO | APP | previa-app=activating http=502
+2026-11-14 01:45:50 | AUTO-HEAL | WATCHDOG | previa-app estava 'deactivating' -> iniciado pelo healthcheck -> active
+2026-11-14 01:46:11 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-14 01:46:13 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+2026-11-14 01:46:13 | CRITICO | APP | previa-app=active http=000
+2026-11-14 01:46:30 | RECUPERADO | NGINX | nginx ativo novamente
+2026-11-14 01:47:03 | AUTO-HEAL | APP | servico previa-app reiniciado pelo monitor -> active
+2026-11-14 01:49:13 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 01:49:13 | RECUPERADO | APP | aplicacao respondendo http=200
+2026-11-14 01:49:31 | RECUPERADO | CPU | uso=29% voltou abaixo de 80%
+2026-11-14 01:49:31 | ALERTA | MEM | uso=84% limite=80%
+2026-11-14 01:49:47 | RECUPERADO | MEM | uso=19% voltou abaixo de 80%
+2026-11-14 01:49:47 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 01:50:04 | RECUPERADO | DISK | uso=6% voltou abaixo de 85%
+2026-11-14 02:08:27 | CRITICO | NGINX | nginx esta 'inactive'
+2026-11-14 02:08:29 | AUTO-HEAL | NGINX | servico nginx reiniciado pelo monitor -> active
+2026-11-14 02:08:29 | CRITICO | APP | previa-app=active http=000
+2026-11-14 02:08:45 | RECUPERADO | NGINX | nginx ativo novamente
+2026-11-14 02:08:45 | RECUPERADO | APP | aplicacao respondendo http=200
+2026-11-14 02:09:09 | AUTO-HEAL | WATCHDOG | previa-app estava 'inactive' -> iniciado pelo healthcheck -> active
+2026-11-14 02:15:49 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 02:16:05 | RECUPERADO | CPU | uso=6% voltou abaixo de 80%
+2026-11-14 02:16:05 | ALERTA | MEM | uso=84% limite=80%
+2026-11-14 02:16:22 | RECUPERADO | MEM | uso=19% voltou abaixo de 80%
+2026-11-14 02:16:22 | ALERTA | DISK | uso=88% limite=85%
+2026-11-14 02:16:38 | RECUPERADO | DISK | uso=6% voltou abaixo de 85%
+2026-11-14 02:19:20 | CRITICO | CPU | uso=100% limite=80%
+2026-11-14 02:23:37 | RECUPERADO | CPU | uso=0% voltou abaixo de 80%

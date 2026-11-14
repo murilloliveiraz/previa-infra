@@ -1,0 +1,118 @@
+
+   ____                 ___    _
+  |  _ \ _ __ _____   _|_ _|  / \      Quadras Inteligentes contra Alagamentos
+  | |_) | '__/ _ \ \ / /| |  / _ \     Provisionamento automatizado da infraestrutura
+  |  __/| | |  __/\ V / | | / ___ \
+  |_|   |_|  \___| \_/ |___/_/   \_\
+
+[INFO]  Configuracao: /opt/previa-infra/config/previa.env
+[INFO]  Logs de execucao: /var/log/previa/provision.log | Auditoria: /var/log/previa/audit.log
+
+==> >>> Executando scripts/01-infra-network.sh
+
+==> 1/7 Instalando pacotes base
+[ OK ]  Pacotes base instalados: tzdata curl jq iproute2 iputils-ping dnsutils ufw auditd logrotate rsync procps cron
+
+==> 2/7 Configurando hostname
+[ OK ]  /etc/hostname gravado: previa-srv01
+
+==> 3/7 Detectando rede e configurando IP
+[INFO]  Interface: eth0 | IP atual: 172.17.0.2/16 | Gateway: 172.17.0.1
+[ OK ]  STATIC_IP vazio: mantendo DHCP (172.17.0.2/16)
+
+==> 4/7 Configurando DNS
+[ OK ]  /etc/hosts: previa-srv01.previa.local e [app.previa.local api.previa.local painel.previa.local] -> 172.17.0.2
+[WARN]  systemd-resolved inativo; DNS externo mantido como esta (/etc/resolv.conf)
+[ OK ]  Resolve previa-srv01.previa.local -> 127.0.1.1
+[ OK ]  Resolve app.previa.local -> 172.17.0.2
+[ OK ]  Resolve api.previa.local -> 172.17.0.2
+[ OK ]  Resolve painel.previa.local -> 172.17.0.2
+[ OK ]  DNS externo funcionando (github.com resolvido)
+
+==> 5/7 Fuso horario
+[ OK ]  Timezone: America/Sao_Paulo
+
+==> 6/7 Firewall (ufw)
+[ OK ]  ufw ativo: entrada bloqueada, liberado SSH(22) e HTTP(80)
+
+==> 7/7 Auditoria do kernel (auditd)
+[WARN]  auditd indisponivel neste ambiente; trilha de auditoria segue em /var/log/previa/audit.log
+
+==> Resumo da infraestrutura
+Hostname : previa-srv01  (FQDN: previa-srv01.previa.local)
+Interface: eth0
+IP       : 172.17.0.2
+Gateway  : 172.17.0.1
+DNS      : 1.1.1.1 8.8.8.8 (dominio previa.local)
+Timezone : America/Sao_Paulo  -> Sat Nov 14 02:21:17 -03 2026
+[ OK ]  Infraestrutura provisionada
+
+==> >>> Executando scripts/02-app-provision.sh
+
+==> 1/8 Instalando dependencias da aplicacao
+[ OK ]  Dependencias: python3 python3-venv python3-pip nginx sqlite3 curl
+[INFO]  Versoes: Python 3.10.12 | nginx version: nginx/1.18.0 (Ubuntu) | sqlite 3.37.2
+
+==> 2/8 Usuario de servico
+[ OK ]  Usuario de sistema criado: previa (sem shell de login)
+
+==> 3/8 Diretorios e permissoes
+[ OK ]  /opt/previa (codigo) | /var/lib/previa (dados) | /etc/previa (config) | /var/log/previa (logs)
+
+==> 4/8 Variaveis de ambiente
+[ OK ]  Chave secreta gerada em /etc/previa/secret.env
+[ OK ]  Variaveis instaladas em /etc/previa/previa.env (APP_ENV=production, APP_PORT=8000)
+
+==> 5/8 Codigo da aplicacao + ambiente virtual
+[ OK ]  Bibliotecas Python: flask==3.0.3 gunicorn==22.0.0 
+
+==> 6/8 Banco de dados
+[ OK ]  SQLite pronto em /var/lib/previa/previa.db (30 sensores simulados)
+
+==> 7/8 Orquestracao: systemd + nginx
+[ OK ]  nginx: proxy reverso :80 -> 127.0.0.1:8000
+
+==> 8/8 Validando a aplicacao
+[ OK ]  Aplicacao no ar em http://app.previa.local  -> {"app":"previa","db":"ok","env":"production","host":"previa-srv01","pid":5458,"status":"ok","time":"2026-11-13T23:22:49","version":"1.0.0"}
+
+==> >>> Executando scripts/03-monitoring-setup.sh
+
+==> 1/4 Instalando scripts de monitoramento
+[ OK ]  /usr/local/bin/previa-monitor e /usr/local/bin/previa-healthcheck
+
+==> 2/4 Registrando servicos systemd
+[ OK ]  /etc/systemd/system/previa-monitor.service
+[ OK ]  /etc/systemd/system/previa-healthcheck.service
+[ OK ]  /etc/systemd/system/previa-healthcheck.timer
+
+==> 3/4 Rotacao de logs (logrotate)
+[ OK ]  logrotate: diario, 14 dias, compactado
+
+==> 4/4 Validando
+[ OK ]  previa-monitor.service ativo
+[ OK ]  previa-healthcheck.timer ativo
+[INFO]  Restart policy do monitor: always, RestartSec=5s
+[INFO]  Ultimas metricas: 2026-11-13 23:22:51 | CPU=  2% | MEM=  6% | DISK=  2% | LOAD=1.44 | APP=active | NGINX=active | HTTP=200
+[ OK ]  Monitoramento configurado
+
+=========== PrevIA - STATUS 2026-11-13 23:22:53 ===========
+Host : previa-srv01  |  IP: 172.17.0.2  |  Uptime: up 25 minutes
+
+  previa-app                 active     restarts=0
+  previa-monitor             active     restarts=0
+  previa-healthcheck.timer   active     restarts=
+  nginx                      active     restarts=0
+  auditd                     failed     restarts=5
+
+  HTTP /api/health: 200
+
+--- Ultima coleta do monitor ---
+2026-11-13 23:22:51 | CPU=  2% | MEM=  6% | DISK=  2% | LOAD=1.44 | APP=active | NGINX=active | HTTP=200
+
+--- Ultimos 5 alertas ---
+  nenhum
+
+[ OK ]  PrevIA provisionada em 136s
+[INFO]  Acesse: http://app.previa.local  (na VM)  ou  http://<IP-da-VM>  (no seu computador)
+[INFO]  Teste de falha: sudo ./scripts/failure-test.sh all
+[INFO]  Relatorio de auditoria: sudo ./scripts/audit-report.sh

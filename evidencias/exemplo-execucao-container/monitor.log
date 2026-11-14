@@ -1,0 +1,15 @@
+2026-11-13 23:22:50 | INFO | previa-monitor iniciado (pid=5552 intervalo=15s CPU<80% MEM<80% DISK<3%)
+2026-11-13 23:22:51 | CPU=  2% | MEM=  6% | DISK=  2% | LOAD=1.44 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:23:02 | INFO | previa-monitor iniciado (pid=5747 intervalo=15s CPU<80% MEM<80% DISK<3%)
+2026-11-13 23:23:03 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=1.19 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:23:20 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=0.92 | APP=active | NGINX=inactive | HTTP=000
+2026-11-13 23:23:38 | CPU=  0% | MEM=  6% | DISK=  2% | LOAD=0.72 | APP=inactive | NGINX=active | HTTP=502
+2026-11-13 23:23:56 | CPU=100% | MEM=  6% | DISK=  2% | LOAD=2.47 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:13 | CPU=100% | MEM=  6% | DISK=  2% | LOAD=3.70 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:29 | CPU= 12% | MEM= 39% | DISK=  2% | LOAD=3.84 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:24:45 | CPU= 13% | MEM= 80% | DISK=  2% | LOAD=3.29 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:01 | CPU=  0% | MEM= 84% | DISK=  2% | LOAD=2.56 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:17 | CPU=  0% | MEM= 84% | DISK=  2% | LOAD=1.99 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:33 | CPU=  0% | MEM=  8% | DISK=  6% | LOAD=1.50 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:25:49 | CPU=  0% | MEM=  8% | DISK=  6% | LOAD=1.25 | APP=active | NGINX=active | HTTP=200
+2026-11-13 23:26:06 | CPU=  6% | MEM=  7% | DISK=  2% | LOAD=1.11 | APP=active | NGINX=active | HTTP=200

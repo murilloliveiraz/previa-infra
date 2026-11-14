@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Infraestrutura{% endblock %}
+{% block content %}
+<h2>Saude do servidor (dados do servico previa-monitor)</h2>
+{% if not m %}
+  <div class="card">O monitor ainda nao publicou metricas. Verifique <code>systemctl status previa-monitor</code>.</div>
+{% else %}
+  <p class="muted">Coleta: {{ m.timestamp }} · host {{ m.hostname }} · load {{ m.load }}</p>
+  <div class="grid">
+    {% for nome, chave in [("CPU","cpu"),("Memoria","mem"),("Disco","disk")] %}
+    <div class="card">
+      <h3>{{ nome }}</h3>
+      <span class="pill {{ 'Critico' if m.state[chave] == 'CRITICO' else ('Alto' if m.state[chave] == 'ALERTA' else 'Baixo') }}">{{ m.state[chave] }}</span>
+      <p style="font-size:28px;margin:10px 0 0"><b>{{ m[chave] }}%</b></p>
+      <div class="bar"><span style="width:{{ m[chave] }}%"></span></div>
+      <p class="muted">Limite de alerta: {{ m.limits[chave] }}%</p>
+    </div>
+    {% endfor %}
+  </div>
+  <h2>Servicos</h2>
+  <table>
+    <tr><th>Servico</th><th>Estado</th></tr>
+    <tr><td>previa-app (Gunicorn)</td><td>{{ m.services['previa-app'] }}</td></tr>
+    <tr><td>nginx (proxy reverso)</td><td>{{ m.services['nginx'] }}</td></tr>
+    <tr><td>HTTP /api/health</td><td>{{ m.services['http'] }}</td></tr>
+  </table>
+{% endif %}
+{% endblock %}

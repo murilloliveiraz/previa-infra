@@ -1,0 +1,31 @@
+[INFO]  Iniciando testes de falha: all (intervalo do monitor 15s)
+
+==> TESTE app-crash: kill -9 no processo da aplicacao
+[INFO]  PID antes: 5430 -> enviando SIGKILL
+[ OK ]  [app-crash] PASSOU - systemd reiniciou (PID 5430 -> 5728) e HTTP 200 em 5s; NRestarts=1
+
+==> TESTE monitor-kill: o proprio monitor e derrubado
+[ OK ]  [monitor-kill] PASSOU - monitor reiniciado pelo systemd (PID 5552 -> 5747)
+
+==> TESTE nginx-stop: proxy reverso derrubado
+[ OK ]  [nginx-stop] PASSOU - nginx recuperado em 15s | 2026-11-13 23:23:20 | CRITICO | NGINX | nginx esta 'inactive'
+
+==> TESTE app-stop: parada manual (systemctl stop) - Restart=always NAO atua
+[INFO]  previa-app parado. Aguardando monitor/healthcheck (ate 95s)...
+[ OK ]  [app-stop] PASSOU - app recuperado automaticamente em 19s | 2026-11-13 23:23:22 | CRITICO | APP | previa-app=active http=000
+
+==> TESTE cpu: estresse de CPU por 40s em 8 nucleos
+[ OK ]  [cpu] PASSOU - 2026-11-13 23:23:56 | CRITICO | CPU | uso=100% limite=80%
+
+==> TESTE mem: alocando memoria ate passar de 80%
+[INFO]  Alocando 11658 MB por 40s
+[INFO]  Memoria alocada em 30s; aguardando o monitor (35s)
+[ OK ]  [mem] PASSOU - 2026-11-13 23:24:45 | ALERTA | MEM | uso=80% limite=80%
+
+==> TESTE disk: ocupando disco ate passar de 3%
+[INFO]  Criando arquivo de 39987 MB em /var/tmp/previa-disk-test.img
+[ OK ]  [disk] PASSOU - 2026-11-13 23:25:33 | ALERTA | DISK | uso=6% limite=3%
+[INFO]  Arquivo removido; o monitor deve registrar RECUPERADO no proximo ciclo
+
+[INFO]  Resultado: 7 PASSOU / 0 FALHOU  (detalhes em /var/log/previa/failure-tests.log)
+[INFO]  Alertas gerados durante os testes: tail -n 30 /var/log/previa/alerts.log
