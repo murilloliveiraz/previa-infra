@@ -125,7 +125,7 @@ tail -n 5 /var/log/previa/monitor.log
 
 **Painel de cima:** `vagrant ssh` e depois:
 ```bash
-tail -f /var/log/previa/alerts.log
+tail -F /var/log/previa/alerts.log
 ```
 **Painel de baixo** (na VM, em `/opt/previa-infra`):
 ```bash

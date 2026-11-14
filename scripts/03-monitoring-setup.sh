@@ -18,6 +18,12 @@ install -o root -g root -m 755 "$PREVIA_ROOT/scripts/monitor.sh"     /usr/local/
 install -o root -g root -m 755 "$PREVIA_ROOT/scripts/healthcheck.sh" /usr/local/bin/previa-healthcheck
 log_ok "/usr/local/bin/previa-monitor e /usr/local/bin/previa-healthcheck"
 
+# Cria os logs vazios para que "tail -f" funcione mesmo antes do primeiro alerta
+for f in monitor.log alerts.log healthcheck.log failure-tests.log; do
+    touch "$LOG_DIR/$f"
+done
+chmod 644 "$LOG_DIR"/*.log
+
 log_step "2/4 Registrando servicos systemd"
 for unit in previa-monitor.service previa-healthcheck.service previa-healthcheck.timer; do
     render_template "$PREVIA_ROOT/systemd/$unit" "/etc/systemd/system/$unit"

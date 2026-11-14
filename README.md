@@ -103,8 +103,8 @@ O script é **idempotente**: rodar de novo atualiza a configuração sem quebrar
 | `sudo ./scripts/failure-test.sh all` | Roda todos os testes de falha |
 | `sudo ./scripts/failure-test.sh cpu` | Roda um teste específico (`app-crash`, `app-stop`, `nginx-stop`, `monitor-kill`, `cpu`, `mem`, `disk`) |
 | `sudo ./scripts/audit-report.sh` | Gera o relatório de auditoria em `evidencias/` |
-| `tail -f /var/log/previa/monitor.log` | Acompanha as métricas em tempo real |
-| `tail -f /var/log/previa/alerts.log` | Acompanha os alertas em tempo real |
+| `tail -F /var/log/previa/monitor.log` | Acompanha as métricas em tempo real |
+| `tail -F /var/log/previa/alerts.log` | Acompanha os alertas em tempo real |
 | `journalctl -u previa-monitor -f` | Logs do serviço de monitoramento no journald |
 
 ## Critérios de avaliação: onde cada um está
