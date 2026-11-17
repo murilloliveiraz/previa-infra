@@ -3,7 +3,7 @@
 > **FIAP · Global Solution 2026.2 · CitizenTech · Engenharia de Software**
 > Infraestrutura Linux provisionada **100% via Shell Script** para hospedar a aplicação web da PrevIA, com monitoramento como serviço tolerante a falhas, logs de auditoria e testes de falha automatizados.
 
-🎥 **Vídeo de demonstração (até 7 min):** `COLE_AQUI_O_LINK_DO_YOUTUBE`
+🎥 **Vídeo de demonstração (até 7 min):** `https://youtu.be/wUrvskfPl2E`
 
 ## Ficha da CitizenTech
 
